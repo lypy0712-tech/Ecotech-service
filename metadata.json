@@ -1,0 +1,6 @@
+{
+  "name": "Sistern Təmizləmə Xidməti",
+  "description": "Profesional sistern, su çənləri və anbarların təmizlənməsi və dezinfeksiyası xidməti.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
