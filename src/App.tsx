@@ -64,7 +64,7 @@ export default function App() {
   const [lang, setLang] = useState<Language>("az");
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [submissions, setSubmissions] = useState<CallbackSubmission[]>(() => {
-    const cached = localStorage.getItem("aquaclean_callbacks");
+    const cached = localStorage.getItem("ecotech_callbacks");
     if (cached) {
       try {
         return JSON.parse(cached);
@@ -77,49 +77,49 @@ export default function App() {
 
   // Dynamic CMS state elements
   const [navLinks, setNavLinks] = useState<NavLink[]>(() => {
-    const cached = localStorage.getItem("aquaclean_nav_links");
+    const cached = localStorage.getItem("ecotech_nav_links");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return NAV_LINKS;
   });
 
   const [services, setServices] = useState<ServiceItem[]>(() => {
-    const cached = localStorage.getItem("aquaclean_services");
+    const cached = localStorage.getItem("ecotech_services");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return SERVICES;
   });
 
   const [advantages, setAdvantages] = useState<AdvantageItem[]>(() => {
-    const cached = localStorage.getItem("aquaclean_advantages");
+    const cached = localStorage.getItem("ecotech_advantages");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return ADVANTAGES;
   });
 
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>(() => {
-    const cached = localStorage.getItem("aquaclean_portfolio");
+    const cached = localStorage.getItem("ecotech_portfolio");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return PORTFOLIO;
   });
 
   const [reviews, setReviews] = useState<ReviewItem[]>(() => {
-    const cached = localStorage.getItem("aquaclean_reviews");
+    const cached = localStorage.getItem("ecotech_reviews");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return REVIEWS;
   });
 
   const [heroTexts, setHeroTexts] = useState(() => {
-    const cached = localStorage.getItem("aquaclean_hero_texts");
+    const cached = localStorage.getItem("ecotech_hero_texts");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return {
       title: DICTIONARY.hero.title,
@@ -129,9 +129,9 @@ export default function App() {
   });
 
   const [statsTexts, setStatsTexts] = useState(() => {
-    const cached = localStorage.getItem("aquaclean_stats_texts");
+    const cached = localStorage.getItem("ecotech_stats_texts");
     if (cached) {
-      try { return JSON.parse(cached); } catch (e) {}
+      try { return JSON.parse(cached); } catch (e) { }
     }
     return {
       jobs: "1,200+",
@@ -183,18 +183,18 @@ export default function App() {
   // Save submissions helper
   const saveSubmissions = (updated: CallbackSubmission[]) => {
     setSubmissions(updated);
-    localStorage.setItem("aquaclean_callbacks", JSON.stringify(updated));
+    localStorage.setItem("ecotech_callbacks", JSON.stringify(updated));
   };
 
   // Reset entire application data back to default baseline
   const handleResetAllData = () => {
-    localStorage.removeItem("aquaclean_nav_links");
-    localStorage.removeItem("aquaclean_services");
-    localStorage.removeItem("aquaclean_advantages");
-    localStorage.removeItem("aquaclean_portfolio");
-    localStorage.removeItem("aquaclean_reviews");
-    localStorage.removeItem("aquaclean_hero_texts");
-    localStorage.removeItem("aquaclean_stats_texts");
+    localStorage.removeItem("ecotech_nav_links");
+    localStorage.removeItem("ecotech_services");
+    localStorage.removeItem("ecotech_advantages");
+    localStorage.removeItem("ecotech_portfolio");
+    localStorage.removeItem("ecotech_reviews");
+    localStorage.removeItem("ecotech_hero_texts");
+    localStorage.removeItem("ecotech_stats_texts");
 
     setNavLinks(NAV_LINKS);
     setServices(SERVICES);
@@ -276,7 +276,7 @@ export default function App() {
   };
 
   // Process Callback Form Submission
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
 
@@ -296,41 +296,68 @@ export default function App() {
     setFormErrors({});
     setIsSubmitting(true);
 
-    // Simulate Network Latency
-    setTimeout(() => {
-      // Create new request
-      const now = new Date();
-      const timestampString = now.toLocaleDateString("ru-RU", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      }) + ", " + now.toLocaleTimeString("ru-RU", {
-        hour: "2-digit",
-        minute: "2-digit"
+    // // Simulate Network Latency
+    // setTimeout(() => {
+    //   // Create new request
+    //   const now = new Date();
+    //   const timestampString = now.toLocaleDateString("ru-RU", {
+    //     day: "2-digit",
+    //     month: "2-digit",
+    //     year: "numeric"
+    //   }) + ", " + now.toLocaleTimeString("ru-RU", {
+    //     hour: "2-digit",
+    //     minute: "2-digit"
+    //   });
+
+    // Get readable service type label
+    const options = DICTIONARY.contact.form.serviceOptions;
+    const serviceLabelMap: Record<string, string> = {
+      drinking: options.drinking[lang],
+      petrol: options.petrol[lang],
+      chemical: options.chemical[lang],
+      disinfection: options.disinfection[lang],
+      other: options.other[lang]
+    };
+
+
+    const payload = {
+      name: formData.name,
+      phone: formData.phone,
+      tankVolume: formData.tankVolume || "",
+      serviceType: serviceLabelMap[formData.serviceType] || formData.serviceType,
+      notes: formData.notes || ""
+    }
+
+    console.log(payload)
+
+    try {
+      const response = await fetch("http://localhost:8000/api/callback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
       });
 
-      // Get readable service type label
-      const options = DICTIONARY.contact.form.serviceOptions;
-      const serviceLabelMap: Record<string, string> = {
-        drinking: options.drinking[lang],
-        petrol: options.petrol[lang],
-        chemical: options.chemical[lang],
-        disinfection: options.disinfection[lang],
-        other: options.other[lang]
-      };
+      if (!response.ok) {
+        throw new Error("Ошибка при отправке данных на сервер");
+      }
 
-      const newSubmission: CallbackSubmission = {
-        id: "sub-" + Date.now(),
-        name: formData.name,
-        phone: formData.phone,
-        tankVolume: formData.tankVolume || undefined,
-        serviceType: serviceLabelMap[formData.serviceType] || formData.serviceType,
-        notes: formData.notes || undefined,
-        timestamp: timestampString,
-        status: "pending"
-      };
+      const savedSubmissionFromServer = await response.json();
 
-      const updated = [newSubmission, ...submissions];
+
+      // const newSubmission: CallbackSubmission = {
+      //   id: "sub-" + Date.now(),
+      //   name: formData.name,
+      //   phone: formData.phone,
+      //   tankVolume: formData.tankVolume || undefined,
+      //   serviceType: serviceLabelMap[formData.serviceType] || formData.serviceType,
+      //   notes: formData.notes || undefined,
+      //   timestamp: timestampString,
+      //   status: "pending"
+      // };
+
+      const updated = [savedSubmissionFromServer, ...submissions];
       saveSubmissions(updated);
       setIsSubmitting(false);
       setShowSuccessModal(true);
@@ -343,8 +370,16 @@ export default function App() {
         serviceType: "drinking",
         notes: ""
       });
-    }, 1200);
+
+    } catch (error) {
+      console.error("Критическая ошибка сети:", error);
+      alert("Не удалось связаться с сервером. Проверьте, запущен ли FastAPI.");
+    } finally {
+      setIsSubmitting(false); // Выключаем индикатор загрузки в любом случае
+    }
   };
+  //   }, 1200);
+  // };
 
   // Dashboard Operations
   const handleUpdateStatus = (id: string, nextStatus: "pending" | "called" | "rejected") => {
@@ -365,12 +400,12 @@ export default function App() {
     const firstNames = ["Emin", "Cavid", "Leyla", "Aydın", "Zakir", "Nigar"];
     const lastNames = ["Rəhimov", "Həsənov", "Quliyeva", "Əliyev", "Süleymanov"];
     const servicesOpt = ["drinking", "petrol", "disinfection"];
-    
+
     const randomName = `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`;
     const randomPhone = `+994 (55) 301-${Math.floor(Math.random() * 90 + 10)}-${Math.floor(Math.random() * 90 + 10)}`;
     const randomVolume = `${Math.floor(Math.random() * 50 + 5)} ton`;
     const randomServiceKey = servicesOpt[Math.floor(Math.random() * servicesOpt.length)];
-    
+
     const options = DICTIONARY.contact.form.serviceOptions;
     const serviceLabelMap: Record<string, string> = {
       drinking: options.drinking[lang],
@@ -446,7 +481,7 @@ export default function App() {
 
       {/* Main Single Page Sections wrapper */}
       <main className="flex-grow pt-24">
-        
+
         {/* SECTION 1: HERO / HOME */}
         <section
           id="hero"
@@ -771,8 +806,8 @@ export default function App() {
                   {lang === "az"
                     ? "Bütün işlər rəsmi sənədlərlə və zəmanətlə icra olunur."
                     : lang === "en"
-                    ? "All services completed with certified legal guarantee and paperwork."
-                    : "Все работы сдаются по акту с выдачей официальной гарантии."}
+                      ? "All services completed with certified legal guarantee and paperwork."
+                      : "Все работы сдаются по акту с выдачей официальной гарантии."}
                 </h4>
               </div>
               <button
@@ -830,11 +865,10 @@ export default function App() {
                 <button
                   key={item.id}
                   onClick={() => setActivePortfolioIndex(index)}
-                  className={`px-4 py-2 text-xs md:text-sm font-semibold rounded-full border transition-all cursor-pointer ${
-                    activePortfolioIndex === index
-                      ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-100"
-                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
-                  }`}
+                  className={`px-4 py-2 text-xs md:text-sm font-semibold rounded-full border transition-all cursor-pointer ${activePortfolioIndex === index
+                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-100"
+                    : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                    }`}
                 >
                   {item.title[lang] || `Layihə #${item.id}`}
                 </button>
@@ -961,7 +995,7 @@ export default function App() {
                 viewport={{ once: true }}
                 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-mono bg-blue-50 px-3.5 py-1.5 rounded-full inline-block"
               >
-                SİPARİŞ VƏ ƏLAQƏ (ORDER FORM)
+                SİFARİŞ VƏ ƏLAQƏ (ORDER FORM)
               </motion.div>
               <h2 className="text-3xl md:text-4xl font-bold font-display text-slate-900 tracking-tight">
                 {DICTIONARY.contact.title[lang]}
@@ -973,7 +1007,7 @@ export default function App() {
 
             {/* Split row layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">
-              
+
               {/* Callback input fields Card */}
               <div className="lg:col-span-7 bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-100 shadow-xl text-left">
                 <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -988,9 +1022,8 @@ export default function App() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={DICTIONARY.contact.form.namePlaceholder[lang]}
-                      className={`w-full px-4 py-3 bg-white text-slate-900 rounded-xl border text-sm outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-100 ${
-                        formErrors.name ? "border-red-400 focus:ring-red-500/10" : "border-slate-200"
-                      }`}
+                      className={`w-full px-4 py-3 bg-white text-slate-900 rounded-xl border text-sm outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-100 ${formErrors.name ? "border-red-400 focus:ring-red-500/10" : "border-slate-200"
+                        }`}
                     />
                     {formErrors.name && (
                       <p className="text-[11px] text-red-500 font-medium">{formErrors.name}</p>
@@ -1009,9 +1042,8 @@ export default function App() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder={DICTIONARY.contact.form.phonePlaceholder[lang]}
-                        className={`w-full px-4 py-3 bg-white text-slate-900 rounded-xl border text-sm outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-100 ${
-                          formErrors.phone ? "border-red-400 focus:ring-red-500/10" : "border-slate-200"
-                        }`}
+                        className={`w-full px-4 py-3 bg-white text-slate-900 rounded-xl border text-sm outline-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-100 ${formErrors.phone ? "border-red-400 focus:ring-red-500/10" : "border-slate-200"
+                          }`}
                       />
                       {formErrors.phone && (
                         <p className="text-[11px] text-red-500 font-medium">{formErrors.phone}</p>
@@ -1091,21 +1123,21 @@ export default function App() {
               {/* Aesthetic trust indicators panel */}
               <div className="lg:col-span-5 bg-gradient-to-br from-blue-900 to-blue-950 text-white p-8 md:p-10 rounded-3xl flex flex-col justify-between text-left border border-blue-950 shadow-xl relative overflow-hidden">
                 <div className="absolute -top-12 -right-12 w-48 h-48 bg-sky-400/20 rounded-full blur-3xl" />
-                
+
                 <div className="space-y-6 relative z-10">
                   <h3 className="text-xl md:text-2xl font-bold tracking-tight font-display text-sky-400">
                     {lang === "az"
                       ? "Operativ Mühəndis Müayinəsi"
                       : lang === "en"
-                      ? "Rapid Engineering Check"
-                      : "Выезд инженера за 5 минут"}
+                        ? "Rapid Engineering Check"
+                        : "Выезд инженера за 5 минут"}
                   </h3>
                   <p className="text-sm text-sky-100/90 leading-relaxed font-light">
                     {lang === "az"
                       ? "Mütəxəssisimiz obyektə yerində baxış keçirir, sisternlərin çirklənmə dərəcəsini qiymətləndirir və sizə ən optimal təmizlik həllini təklif edir."
                       : lang === "en"
-                      ? "Our specialist inspects your water systems in person, identifies the hazardous scaling layers, and supplies the best quotes immediately."
-                      : "Наш специалист оперативно оценит загрязненность ваших емкостей и разработает детальную смету на очистку."}
+                        ? "Our specialist inspects your water systems in person, identifies the hazardous scaling layers, and supplies the best quotes immediately."
+                        : "Наш специалист оперативно оценит загрязненность ваших емкостей и разработает детальную смету на очистку."}
                   </p>
 
                   {/* Quick checks list */}
@@ -1157,7 +1189,7 @@ export default function App() {
                     </div>
                     <div>
                       <div className="text-[10px] uppercase font-bold text-sky-300">E-Poçt Ünvanımız</div>
-                      <div className="text-sm font-semibold text-white">info@aquaclean-cisterns.az</div>
+                      <div className="text-sm font-semibold text-white">info@ecotech-cisterns.az</div>
                     </div>
                   </div>
                 </div>
@@ -1193,7 +1225,7 @@ export default function App() {
                   <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                 </svg>
               </div>
-              <span className="text-lg font-bold text-white tracking-tight">AQUACLEAN</span>
+              <span className="text-lg font-bold text-white tracking-tight">ecotech</span>
             </div>
             <p className="text-xs leading-relaxed text-slate-400">
               {DICTIONARY.footer.description[lang]}
@@ -1229,7 +1261,7 @@ export default function App() {
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-sky-400 flex-shrink-0" />
-                <span>info@aquaclean-cisterns.az</span>
+                <span>info@ecotech-cisterns.az</span>
               </p>
             </div>
           </div>
@@ -1243,8 +1275,8 @@ export default function App() {
               {lang === "az"
                 ? "Respublika ərazisində 7/24 operativ xidmət qruplarımız fəaliyyət göstərir. Sifarişlər həm fərdi, həm də korporativ qaydada qəbul edilir."
                 : lang === "en"
-                ? "Our mobile teams work around the clock 24/7. We cater to domestic estates as well as heavy machinery plants."
-                : "Рабочие группы выезжают на объекты в режиме 24/7. Принимаем заявки как от физических, так и от юридических лиц."}
+                  ? "Our mobile teams work around the clock 24/7. We cater to domestic estates as well as heavy machinery plants."
+                  : "Рабочие группы выезжают на объекты в режиме 24/7. Принимаем заявки как от физических, так и от юридических лиц."}
             </p>
           </div>
         </div>
@@ -1252,7 +1284,7 @@ export default function App() {
         {/* Bottom bar */}
         <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-xs gap-4 text-slate-500">
           <div>
-            © {new Date().getFullYear()} AQUACLEAN Cistern Services. {DICTIONARY.footer.rights[lang]}
+            © {new Date().getFullYear()} ecotech Cistern Services. {DICTIONARY.footer.rights[lang]}
           </div>
 
           {/* Scroll to top */}

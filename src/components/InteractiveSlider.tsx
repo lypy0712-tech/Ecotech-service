@@ -130,7 +130,7 @@ export default function InteractiveSlider({ item, lang, labels }: InteractiveSli
 
         {/* Subtle Watermark details */}
         <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none z-10 text-[10px] md:text-xs text-white/80 bg-slate-900/40 backdrop-blur-xs py-1 px-3 rounded">
-          <span>AquaClean Cisterns Ltd.</span>
+          <span>Ecotech Service</span>
           <span className="flex items-center gap-1">
             <Maximize2 className="w-3 h-3" />
             {labels.guide}

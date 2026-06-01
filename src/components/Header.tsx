@@ -91,11 +91,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
                 <button
                   key={ln}
                   onClick={() => onLangChange(ln)}
-                  className={`px-1 rounded-sm text-[10px] font-bold uppercase transition-all ${
-                    currentLang === ln
+                  className={`px-1 rounded-sm text-[10px] font-bold uppercase transition-all ${currentLang === ln
                       ? "bg-sky-400 text-blue-950"
                       : "text-sky-300 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {ln}
                 </button>
@@ -107,11 +106,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
 
       {/* Main navigation container */}
       <nav
-        className={`px-4 py-3 md:py-4 transition-all duration-300 ${
-          scrolled
+        className={`px-4 py-3 md:py-4 transition-all duration-300 ${scrolled
             ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-sky-100"
             : "bg-gradient-to-b from-blue-900/80 to-blue-950/20 backdrop-blur-xs text-white"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
@@ -120,9 +118,8 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
             className="flex items-center gap-2 cursor-pointer group"
           >
             {/* Minimalist Water Droplet Tank Logo */}
-            <div className={`p-2.5 rounded-xl transition-all ${
-              scrolled ? "bg-blue-600 text-white" : "bg-white text-blue-600"
-            }`}>
+            <div className={`p-2.5 rounded-xl transition-all ${scrolled ? "bg-blue-600 text-white" : "bg-white text-blue-600"
+              }`}>
               <svg
                 viewBox="0 0 24 24"
                 className="w-5 h-5 fill-current"
@@ -133,10 +130,9 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
               </svg>
             </div>
             <div>
-              <span className={`text-lg md:text-xl font-bold tracking-tight block leading-none transition-colors ${
-                scrolled ? "text-slate-900" : "text-white"
-              }`}>
-                AQUACLEAN
+              <span className={`text-lg md:text-xl font-bold tracking-tight block leading-none transition-colors ${scrolled ? "text-slate-900" : "text-white"
+                }`}>
+                ECOTECH
               </span>
               <span className="text-[9px] font-mono tracking-widest uppercase block opacity-75">
                 Cistern Cleaners
@@ -153,15 +149,14 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
                   <button
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
-                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 cursor-pointer ${
-                      isActive
+                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 cursor-pointer ${isActive
                         ? scrolled
                           ? "bg-blue-600 text-white shadow-sm"
                           : "bg-white/20 text-white"
                         : scrolled
-                        ? "text-slate-600 hover:text-blue-600 hover:bg-slate-100"
-                        : "text-sky-100 hover:text-white hover:bg-white/10"
-                    }`}
+                          ? "text-slate-600 hover:text-blue-600 hover:bg-slate-100"
+                          : "text-sky-100 hover:text-white hover:bg-white/10"
+                      }`}
                   >
                     {link.label[currentLang]}
                   </button>
@@ -172,11 +167,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
             {/* Callback urgent button */}
             <button
               onClick={() => scrollToSection("contact")}
-              className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all shadow-md cursor-pointer hover:scale-[1.03] active:scale-[0.98] ${
-                scrolled
+              className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all shadow-md cursor-pointer hover:scale-[1.03] active:scale-[0.98] ${scrolled
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-200"
                   : "bg-sky-400 text-blue-950 hover:bg-sky-300"
-              }`}
+                }`}
             >
               Qaynar Xətt
             </button>
@@ -187,9 +181,8 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
             {/* Quick call */}
             <a
               href="tel:+994503333322"
-              className={`p-2.5 rounded-full ${
-                scrolled ? "bg-slate-100 text-blue-600" : "bg-white/10 text-sky-200"
-              }`}
+              className={`p-2.5 rounded-full ${scrolled ? "bg-slate-100 text-blue-600" : "bg-white/10 text-sky-200"
+                }`}
             >
               <Phone className="w-5 h-5" />
             </a>
@@ -197,11 +190,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
             {/* Menu trigger */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2.5 rounded-full transition-colors ${
-                scrolled
+              className={`p-2.5 rounded-full transition-colors ${scrolled
                   ? "text-slate-800 hover:bg-slate-100"
                   : "text-white hover:bg-white/10"
-              }`}
+                }`}
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -222,11 +214,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className={`w-full py-3 px-4 rounded-xl text-left text-base font-semibold transition-all flex justify-between items-center ${
-                    isActive
+                  className={`w-full py-3 px-4 rounded-xl text-left text-base font-semibold transition-all flex justify-between items-center ${isActive
                       ? "bg-sky-400 text-blue-950 shadow-md"
                       : "text-sky-100 hover:bg-white/5 hover:text-white"
-                  }`}
+                    }`}
                 >
                   <span>{link.label[currentLang]}</span>
                   {isActive && <div className="w-2 h-2 rounded-full bg-blue-950" />}
@@ -252,11 +243,10 @@ export default function Header({ currentLang, onLangChange, activeSection, navLi
                 <button
                   key={ln}
                   onClick={() => onLangChange(ln)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center gap-1.5 ${
-                    currentLang === ln
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center gap-1.5 ${currentLang === ln
                       ? "bg-sky-400 text-blue-950 shadow-md"
                       : "text-sky-300 hover:text-white"
-                  }`}
+                    }`}
                 >
                   <Globe className="w-3.5 h-3.5" />
                   {getLanguageLabel(ln)}

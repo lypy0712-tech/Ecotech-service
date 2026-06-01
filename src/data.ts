@@ -427,7 +427,7 @@ export const DICTIONARY = {
 
 // Auto-load custom DICTIONARY values if they exist in localStorage
 if (typeof window !== "undefined") {
-  const cachedDict = localStorage.getItem("aquaclean_custom_dictionary");
+  const cachedDict = localStorage.getItem("ecotech_custom_dictionary");
   if (cachedDict) {
     try {
       const parsed = JSON.parse(cachedDict);

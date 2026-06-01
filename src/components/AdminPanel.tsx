@@ -82,7 +82,7 @@ export default function AdminPanel({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem("aquaclean_cms_auth") === "true";
+    return localStorage.getItem("ecotech_cms_auth") === "true";
   });
   const [authError, setAuthError] = useState("");
 
@@ -90,7 +90,7 @@ export default function AdminPanel({
     e.preventDefault();
     if (username.trim().toLowerCase() === "admin" && password.trim() === "admin") {
       setIsLoggedIn(true);
-      localStorage.setItem("aquaclean_cms_auth", "true");
+      localStorage.setItem("ecotech_cms_auth", "true");
       setAuthError("");
     } else {
       setAuthError("Yalnış istifadəçi adı və ya şifrə! / Неверный логин или пароль!");
@@ -99,7 +99,7 @@ export default function AdminPanel({
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("aquaclean_cms_auth");
+    localStorage.removeItem("ecotech_cms_auth");
   };
 
   // Customizable sections dictionary state
@@ -206,8 +206,8 @@ export default function AdminPanel({
       }
     };
 
-    localStorage.setItem("aquaclean_custom_dictionary", JSON.stringify(customDictJson));
-    
+    localStorage.setItem("ecotech_custom_dictionary", JSON.stringify(customDictJson));
+
     // Also merge instantly to current session DICTIONARY object
     Object.assign(DICTIONARY.services.title, updated.servicesTitle);
     Object.assign(DICTIONARY.services.subtitle, updated.servicesSubtitle);
@@ -289,7 +289,7 @@ export default function AdminPanel({
       },
     ];
     setNavLinks(updated);
-    localStorage.setItem("aquaclean_nav_links", JSON.stringify(updated));
+    localStorage.setItem("ecotech_nav_links", JSON.stringify(updated));
 
     // Clear form
     setNewMenuId("");
@@ -301,7 +301,7 @@ export default function AdminPanel({
   const handleDeleteNavLink = (id: string) => {
     const updated = navLinks.filter((n) => n.id !== id);
     setNavLinks(updated);
-    localStorage.setItem("aquaclean_nav_links", JSON.stringify(updated));
+    localStorage.setItem("ecotech_nav_links", JSON.stringify(updated));
   };
 
   // Service Items Handlers
@@ -331,7 +331,7 @@ export default function AdminPanel({
 
     const updated = [...services, newService];
     setServices(updated);
-    localStorage.setItem("aquaclean_services", JSON.stringify(updated));
+    localStorage.setItem("ecotech_services", JSON.stringify(updated));
 
     // Clear
     setNewServiceTitleAz("");
@@ -348,7 +348,7 @@ export default function AdminPanel({
   const handleDeleteService = (id: number) => {
     const updated = services.filter((s) => s.id !== id);
     setServices(updated);
-    localStorage.setItem("aquaclean_services", JSON.stringify(updated));
+    localStorage.setItem("ecotech_services", JSON.stringify(updated));
   };
 
   // Advantages Handlers
@@ -373,7 +373,7 @@ export default function AdminPanel({
 
     const updated = [...advantages, newAdv];
     setAdvantages(updated);
-    localStorage.setItem("aquaclean_advantages", JSON.stringify(updated));
+    localStorage.setItem("ecotech_advantages", JSON.stringify(updated));
 
     // Clear
     setNewAdvTitleAz("");
@@ -387,7 +387,7 @@ export default function AdminPanel({
   const handleDeleteAdvantage = (id: number) => {
     const updated = advantages.filter((a) => a.id !== id);
     setAdvantages(updated);
-    localStorage.setItem("aquaclean_advantages", JSON.stringify(updated));
+    localStorage.setItem("ecotech_advantages", JSON.stringify(updated));
   };
 
   // Portfolio Handlers
@@ -413,7 +413,7 @@ export default function AdminPanel({
 
     const updated = [...portfolio, newPort];
     setPortfolio(updated);
-    localStorage.setItem("aquaclean_portfolio", JSON.stringify(updated));
+    localStorage.setItem("ecotech_portfolio", JSON.stringify(updated));
 
     // Clear
     setNewPortTitleAz("");
@@ -427,7 +427,7 @@ export default function AdminPanel({
   const handleDeletePortfolio = (id: number) => {
     const updated = portfolio.filter((p) => p.id !== id);
     setPortfolio(updated);
-    localStorage.setItem("aquaclean_portfolio", JSON.stringify(updated));
+    localStorage.setItem("ecotech_portfolio", JSON.stringify(updated));
   };
 
   // Text Inputs Edit Handlers
@@ -440,7 +440,7 @@ export default function AdminPanel({
       },
     };
     setHeroTexts(updated);
-    localStorage.setItem("aquaclean_hero_texts", JSON.stringify(updated));
+    localStorage.setItem("ecotech_hero_texts", JSON.stringify(updated));
   };
 
   const handleStatsChange = (field: "jobs" | "experience" | "happyClients" | "responseTime", val: string) => {
@@ -449,7 +449,7 @@ export default function AdminPanel({
       [field]: val,
     };
     setStatsTexts(updated);
-    localStorage.setItem("aquaclean_stats_texts", JSON.stringify(updated));
+    localStorage.setItem("ecotech_stats_texts", JSON.stringify(updated));
   };
 
   if (isStandAlone) {
@@ -463,7 +463,7 @@ export default function AdminPanel({
                   <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                 </svg>
               </div>
-              <h2 className="text-lg font-bold tracking-tight text-slate-900">AQUACLEAN CMS</h2>
+              <h2 className="text-lg font-bold tracking-tight text-slate-900">ecotech CMS</h2>
               <p className="text-[11px] text-slate-500 font-medium">Saytın İdarəetmə Panelini açmaq üçün daxil olun</p>
             </div>
 
@@ -527,7 +527,7 @@ export default function AdminPanel({
               <Settings className="w-5 h-5 text-sky-100 animate-spin-slow" />
             </div>
             <div className="text-left">
-              <h3 className="text-sm font-bold text-white tracking-tight">AquaClean CMS • İdarəetmə Paneli</h3>
+              <h3 className="text-sm font-bold text-white tracking-tight">ecotech CMS • İdarəetmə Paneli</h3>
               <p className="text-[10px] text-slate-400 font-mono">Yeni Vərəqdə İdarəetmə Paneli (Standalone • Local Storage & SMTP Alerts)</p>
             </div>
           </div>
@@ -575,11 +575,10 @@ export default function AdminPanel({
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-all flex items-center gap-2 cursor-pointer select-none ${
-                activeTab === tab.id
+              className={`px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-all flex items-center gap-2 cursor-pointer select-none ${activeTab === tab.id
                   ? "bg-blue-600 text-white shadow-md shadow-blue-200"
                   : "text-slate-600 hover:bg-slate-200/80 hover:text-slate-900"
-              }`}
+                }`}
             >
               <span>{tab.label}</span>
               {tab.badge !== undefined && tab.badge > 0 && (
@@ -650,7 +649,7 @@ export default function AdminPanel({
                   <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
                   Добавление нового пункта меню:
                 </h4>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-700">Идентификатор / Якорь секции # *</label>
@@ -709,968 +708,966 @@ export default function AdminPanel({
           )}
 
           {/* TAB 2: SERVICES */}
-              {activeTab === "services" && (
-                <div className="space-y-6">
-                  {/* Current Services List */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие услуги:</h4>
-                    <div className="grid grid-cols-1 gap-4">
-                      {services.map((item) => (
-                        <div key={item.id} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex justify-between items-start gap-4">
-                          <div className="space-y-1.5 text-left">
-                            <span className="inline-block bg-blue-100 text-blue-700 font-mono font-bold text-[10px] px-2 py-0.5 rounded">
-                              Иконка: {item.iconName} • ID-услуги: {item.id}
-                            </span>
-                            <h5 className="font-bold text-slate-900 text-sm">
-                              🇦🇿 {item.title.az} <br />
-                              💬 {item.title.ru}
-                            </h5>
-                            <p className="text-xs text-slate-500 leading-relaxed font-light">
-                              {item.description.ru}
-                            </p>
-                            <p className="text-xs font-semibold text-blue-700">Цена: {item.price?.ru || "—"}</p>
-                          </div>
-                          <button
-                            onClick={() => handleDeleteService(item.id)}
-                            className="text-rose-500 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-50 cursor-pointer"
-                            title="Удалить услугу"
-                          >
-                            <Trash2 className="w-4.5 h-4.5" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Add Service item */}
-                  <form onSubmit={handleAddService} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
-                    <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                      <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
-                      Добавление новой услуги:
-                    </h4>
-
-                    {/* Localised titles */}
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-800">1. Названия услуги на 3-х языках *</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          required
-                          value={newServiceTitleAz}
-                          onChange={(e) => setNewServiceTitleAz(e.target.value)}
-                          placeholder="AZ: Su Çənlərinin təmizlənməsi"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                        <input
-                          type="text"
-                          value={newServiceTitleEn}
-                          onChange={(e) => setNewServiceTitleEn(e.target.value)}
-                          placeholder="EN: Drinking Water Tank Cleanup"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                        <input
-                          type="text"
-                          value={newServiceTitleRu}
-                          onChange={(e) => setNewServiceTitleRu(e.target.value)}
-                          placeholder="RU: Очистка баков для воды"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
+          {activeTab === "services" && (
+            <div className="space-y-6">
+              {/* Current Services List */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие услуги:</h4>
+                <div className="grid grid-cols-1 gap-4">
+                  {services.map((item) => (
+                    <div key={item.id} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex justify-between items-start gap-4">
+                      <div className="space-y-1.5 text-left">
+                        <span className="inline-block bg-blue-100 text-blue-700 font-mono font-bold text-[10px] px-2 py-0.5 rounded">
+                          Иконка: {item.iconName} • ID-услуги: {item.id}
+                        </span>
+                        <h5 className="font-bold text-slate-900 text-sm">
+                          🇦🇿 {item.title.az} <br />
+                          💬 {item.title.ru}
+                        </h5>
+                        <p className="text-xs text-slate-500 leading-relaxed font-light">
+                          {item.description.ru}
+                        </p>
+                        <p className="text-xs font-semibold text-blue-700">Цена: {item.price?.ru || "—"}</p>
                       </div>
-                    </div>
-
-                    {/* Localised Descriptions */}
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-800">2. Описание услуги на 3-х языках</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <textarea
-                          value={newServiceDescAz}
-                          onChange={(e) => setNewServiceDescAz(e.target.value)}
-                          placeholder="AZ: Geniş təsvir..."
-                          rows={2}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                        <textarea
-                          value={newServiceDescEn}
-                          onChange={(e) => setNewServiceDescEn(e.target.value)}
-                          placeholder="EN: Clean reservoirs with care..."
-                          rows={2}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                        <textarea
-                          value={newServiceDescRu}
-                          onChange={(e) => setNewServiceDescRu(e.target.value)}
-                          placeholder="RU: Качественная мойка поверхностей..."
-                          rows={2}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Price and Icon mapping */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Price fields */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-800">3. Цены (AZ, EN, RU)</label>
-                        <div className="grid grid-cols-3 gap-2">
-                          <input
-                            type="text"
-                            value={newServicePriceAz}
-                            onChange={(e) => setNewServicePriceAz(e.target.value)}
-                            placeholder="50 AZN-dən"
-                            className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
-                          />
-                          <input
-                            type="text"
-                            value={newServicePriceEn}
-                            onChange={(e) => setNewServicePriceEn(e.target.value)}
-                            placeholder="From 50 AZN"
-                            className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
-                          />
-                          <input
-                            type="text"
-                            value={newServicePriceRu}
-                            onChange={(e) => setNewServicePriceRu(e.target.value)}
-                            placeholder="От 50 AZN"
-                            className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Icon designation selector */}
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-800">4. Выберите иконку услуги</label>
-                        <select
-                          value={newServiceIcon}
-                          onChange={(e) => setNewServiceIcon(e.target.value)}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white text-slate-800"
-                        >
-                          <option value="Droplets">💧 Капли (Droplets)</option>
-                          <option value="Fuel">⛽ Топливо (Fuel)</option>
-                          <option value="Settings">⚙️ Снаряжение (Settings)</option>
-                          <option value="ShieldCheck">🛡️ Защита (ShieldCheck)</option>
-                          <option value="Activity">📈 График (Activity)</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Добавить Услугу</span>
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* TAB 3: ADVANTAGES */}
-              {activeTab === "advantages" && (
-                <div className="space-y-6">
-                  {/* Current list */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие преимущества:</h4>
-                    <div className="grid grid-cols-1 gap-3">
-                      {advantages.map((adv) => (
-                        <div key={adv.id} className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center text-left">
-                          <div>
-                            <span className="font-mono text-[10px] text-blue-600 bg-sky-100 px-1.5 py-0.5 rounded leading-none font-bold mr-2">
-                              {adv.iconName}
-                            </span>
-                            <span className="font-bold text-xs text-slate-900">{adv.title.ru}</span>
-                            <p className="text-[11px] text-slate-500 mt-1 leading-normal">{adv.description.ru}</p>
-                          </div>
-                          <button
-                            onClick={() => handleDeleteAdvantage(adv.id)}
-                            className="text-rose-500 hover:text-rose-700 p-1 rounded-lg hover:bg-rose-50 cursor-pointer"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Add Advantage Item Form */}
-                  <form onSubmit={handleAddAdvantage} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
-                    <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                      <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
-                      Добавить Новое Преимущество:
-                    </h4>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-700">Заголовки (AZ, EN, RU) *</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          required
-                          value={newAdvTitleAz}
-                          onChange={(e) => setNewAdvTitleAz(e.target.value)}
-                          placeholder="AZ: 100% Zəmanət"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
-                        />
-                        <input
-                          type="text"
-                          value={newAdvTitleEn}
-                          onChange={(e) => setNewAdvTitleEn(e.target.value)}
-                          placeholder="EN: 100% Quality Output"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
-                        />
-                        <input
-                          type="text"
-                          value={newAdvTitleRu}
-                          onChange={(e) => setNewAdvTitleRu(e.target.value)}
-                          placeholder="RU: 100% Гарантия"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-700">Текст преимущества (AZ, EN, RU)</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          value={newAdvDescAz}
-                          onChange={(e) => setNewAdvDescAz(e.target.value)}
-                          placeholder="AZ: Əla komanda ilə..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
-                        />
-                        <input
-                          type="text"
-                          value={newAdvDescEn}
-                          onChange={(e) => setNewAdvDescEn(e.target.value)}
-                          placeholder="EN: With specialized agents..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
-                        />
-                        <input
-                          type="text"
-                          value={newAdvDescRu}
-                          onChange={(e) => setNewAdvDescRu(e.target.value)}
-                          placeholder="RU: С нашей квалифицированной бригадой..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-700">Иконка преимущества</label>
-                      <select
-                          value={newAdvIcon}
-                          onChange={(e) => setNewAdvIcon(e.target.value)}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white text-slate-800"
-                        >
-                          <option value="Activity">🛡️ Сертификат (Activity)</option>
-                          <option value="Cpu">⚡ Немецкие машины (Cpu)</option>
-                          <option value="FileCheck">📝 Договор с НДС (FileCheck)</option>
-                          <option value="Leaf">🌱 Экологично (Leaf)</option>
-                        </select>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Добавить преимущество</span>
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* TAB 4: PORTFOLIO */}
-              {activeTab === "portfolio" && (
-                <div className="space-y-6">
-                  {/* Current Portfolio Items */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие работы (Слайдер):</h4>
-                    <div className="grid grid-cols-1 gap-4">
-                      {portfolio.map((item) => (
-                        <div key={item.id} className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col sm:flex-row justify-between gap-4 text-left">
-                          <div className="space-y-2 flex-grow">
-                            <span className="inline-block bg-blue-100 text-blue-800 font-mono text-[9px] px-2 py-0.5 rounded font-bold">
-                              ID: {item.id}
-                            </span>
-                            <h5 className="font-bold text-slate-900 text-sm">{item.title.ru || item.title.az}</h5>
-                            <p className="text-xs text-slate-500 leading-relaxed font-light">{item.description.ru || item.description.az}</p>
-                            
-                            {/* Images links debug & copy */}
-                            <div className="grid grid-cols-2 gap-3 pt-2">
-                              <div className="bg-white p-2 rounded-xl border border-slate-200">
-                                <span className="text-[9px] uppercase font-bold text-slate-400 block mb-0.5">До (Before Imag URL):</span>
-                                <span className="text-[10px] text-slate-600 font-mono block truncate">{item.beforeImg}</span>
-                              </div>
-                              <div className="bg-white p-2 rounded-xl border border-slate-200">
-                                <span className="text-[9px] uppercase font-bold text-slate-400 block mb-0.5">После (After Imag URL):</span>
-                                <span className="text-[10px] text-slate-600 font-mono block truncate">{item.afterImg}</span>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="flex sm:flex-col justify-between items-end gap-2 flex-shrink-0">
-                            <button
-                              onClick={() => handleDeletePortfolio(item.id)}
-                              className="text-rose-500 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-50 transition-colors cursor-pointer"
-                              title="Удалить работу из слайдера"
-                            >
-                              <Trash2 className="w-4.5 h-4.5" />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Add New Finished Work Portfolio item */}
-                  <form onSubmit={handleAddPortfolio} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
-                    <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                      <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
-                      Добавить новую фотоработу в Слайдер (До и После):
-                    </h4>
-
-                    {/* Titles */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Заголовок AZ *</label>
-                        <input
-                          type="text"
-                          required
-                          value={newPortTitleAz}
-                          onChange={(e) => setNewPortTitleAz(e.target.value)}
-                          placeholder="Sumqayıt təmizlik işi"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700 font-sans">Title EN</label>
-                        <input
-                          type="text"
-                          value={newPortTitleEn}
-                          onChange={(e) => setNewPortTitleEn(e.target.value)}
-                          placeholder="Sumgait Clean job"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Заголовок RU</label>
-                        <input
-                          type="text"
-                          value={newPortTitleRu}
-                          onChange={(e) => setNewPortTitleRu(e.target.value)}
-                          placeholder="Мойка в Сумгаите"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Descriptions */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Описание AZ</label>
-                        <textarea
-                          value={newPortDescAz}
-                          onChange={(e) => setNewPortDescAz(e.target.value)}
-                          rows={2}
-                          placeholder="AZ təsvir..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700 font-sans">Description EN</label>
-                        <textarea
-                          value={newPortDescEn}
-                          onChange={(e) => setNewPortDescEn(e.target.value)}
-                          rows={2}
-                          placeholder="EN description..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Описание RU</label>
-                        <textarea
-                          value={newPortDescRu}
-                          onChange={(e) => setNewPortDescRu(e.target.value)}
-                          rows={2}
-                          placeholder="RU описание..."
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Images URLs inputs */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-800">Ссылка на фотографию «ДО» (Before Image URL) *</label>
-                        <input
-                          type="text"
-                          required
-                          value={newPortBeforeImg}
-                          onChange={(e) => setNewPortBeforeImg(e.target.value)}
-                          placeholder="https://images.unsplash.com/... or relative path"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white font-mono text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-800">Ссылка на фотографию «ПОСЛЕ» (After Image URL) *</label>
-                        <input
-                          type="text"
-                          required
-                          value={newPortAfterImg}
-                          onChange={(e) => setNewPortAfterImg(e.target.value)}
-                          placeholder="https://images.unsplash.com/... or relative path"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white font-mono text-xs text-slate-900 outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Image preset catalog drawer shortcuts for quick validation */}
-                    <div className="bg-slate-100 p-3.5 rounded-xl border border-slate-200 space-y-2 text-left">
-                      <span className="text-[10px] uppercase font-bold text-slate-500 block leading-none">
-                        💡 Быстрые пресеты изображений из Unsplash (можно скопировать в буфер кликом):
-                      </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                        {[
-                          {
-                            label: "Изначальные грязная/чистая цистерна",
-                            b: "cistern_dirty_before",
-                            a: "cistern_shiny_after",
-                          },
-                          {
-                            label: "Промышленный резервуар из Unsplash (Очистка от нефти)",
-                            b: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800",
-                            a: "https://images.unsplash.com/photo-1581091215367-9b6c00b3035a?auto=format&fit=crop&q=80&w=800",
-                          },
-                          {
-                            label: "Бетонный коллектор сточных вод",
-                            b: "https://images.unsplash.com/photo-1542060748-10c28b629f6f?auto=format&fit=crop&q=80&w=800",
-                            a: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800",
-                          },
-                        ].map((pr, idx) => (
-                          <div key={idx} className="bg-white p-2 rounded border border-slate-200 space-y-1">
-                            <span className="font-semibold block text-slate-700">{pr.label}</span>
-                            <div className="flex gap-1">
-                              <button
-                                type="button"
-                                onClick={() => handleCopyLink(pr.b, `b-${idx}`)}
-                                className="bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded scale-95 flex items-center gap-0.5 truncate max-w-[120px]"
-                              >
-                                {copiedIndex === `b-${idx}` ? "Скопировано!" : "Копи До"}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleCopyLink(pr.a, `a-${idx}`)}
-                                className="bg-green-50 text-green-700 px-1.5 py-0.5 rounded scale-95 flex items-center gap-0.5 truncate max-w-[120px]"
-                              >
-                                {copiedIndex === `a-${idx}` ? "Скопировано!" : "Копи После"}
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Создать фотослайд</span>
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* TAB 5: HERO GENERAL TEXTS */}
-              {activeTab === "hero" && (
-                <div className="space-y-6 text-left">
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4">
-                    <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
-                      <Sparkles className="w-4 h-4 text-blue-600" />
-                      Главный экран сайта (Hero Portion):
-                    </h4>
-
-                    {/* Taglines */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-700">Надзаголовок (Tagline):</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">AZ</span>
-                          <input
-                            type="text"
-                            value={heroTexts.tagline.az}
-                            onChange={(e) => handleHeroTextChange("az", "tagline", e.target.value)}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">EN</span>
-                          <input
-                            type="text"
-                            value={heroTexts.tagline.en}
-                            onChange={(e) => handleHeroTextChange("en", "tagline", e.target.value)}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400 font-sans">RU</span>
-                          <input
-                            type="text"
-                            value={heroTexts.tagline.ru}
-                            onChange={(e) => handleHeroTextChange("ru", "tagline", e.target.value)}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Main title */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-700">Главный заголовок сайта:</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">AZ</span>
-                          <textarea
-                            value={heroTexts.title.az}
-                            onChange={(e) => handleHeroTextChange("az", "title", e.target.value)}
-                            rows={2}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">EN</span>
-                          <textarea
-                            value={heroTexts.title.en}
-                            onChange={(e) => handleHeroTextChange("en", "title", e.target.value)}
-                            rows={2}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1 font-sans">
-                          <span className="text-[10px] font-mono text-slate-400">RU</span>
-                          <textarea
-                            value={heroTexts.title.ru}
-                            onChange={(e) => handleHeroTextChange("ru", "title", e.target.value)}
-                            rows={2}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Hero subtitle */}
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-700">Развернутое описание (Подзаголовок):</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">AZ</span>
-                          <textarea
-                            value={heroTexts.subtitle.az}
-                            onChange={(e) => handleHeroTextChange("az", "subtitle", e.target.value)}
-                            rows={3}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">EN</span>
-                          <textarea
-                            value={heroTexts.subtitle.en}
-                            onChange={(e) => handleHeroTextChange("en", "subtitle", e.target.value)}
-                            rows={3}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-mono text-slate-400">RU</span>
-                          <textarea
-                            value={heroTexts.subtitle.ru}
-                            onChange={(e) => handleHeroTextChange("ru", "subtitle", e.target.value)}
-                            rows={3}
-                            className="w-full p-2 border border-slate-200 rounded-lg text-xs"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section Stats numbers */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4">
-                    <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
-                      <RotateCcw className="w-4 h-4 text-blue-600" />
-                      Показатели Статистики (Цифры на главном экране):
-                    </h4>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Вымытых емкостей</label>
-                        <input
-                          type="text"
-                          value={statsTexts.jobs}
-                          onChange={(e) => handleStatsChange("jobs", e.target.value)}
-                          className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Лет нашего опыта</label>
-                        <input
-                          type="text"
-                          value={statsTexts.experience}
-                          onChange={(e) => handleStatsChange("experience", e.target.value)}
-                          className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
-                        />
-                      </div>
-                      <div className="space-y-1 font-sans">
-                        <label className="text-xs font-semibold text-slate-700">Процент клиентов</label>
-                        <input
-                          type="text"
-                          value={statsTexts.happyClients}
-                          onChange={(e) => handleStatsChange("happyClients", e.target.value)}
-                          className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700">Время на отклик (мин)</label>
-                        <input
-                          type="text"
-                          value={statsTexts.responseTime}
-                          onChange={(e) => handleStatsChange("responseTime", e.target.value)}
-                          className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CUSTOM SECTION TITLES & SUBTITLES */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-6">
-                    <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
-                      <Sliders className="w-4 h-4 text-blue-600" />
-                      Тексты и Заголовки Разделов Сайта (Многоязычный CMS):
-                    </h4>
-
-                    {/* Section: Services Headers */}
-                    <div className="space-y-3 pb-4 border-b border-slate-200/60">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">1. Раздел: УСЛУГИ (Services)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Заголовок Раздела:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.servicesTitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("servicesTitle", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок Раздела:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <textarea
-                                value={sectionsDict.servicesSubtitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("servicesSubtitle", key as Language, e.target.value)}
-                                rows={2}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section: Advantages Headers */}
-                    <div className="space-y-3 pb-4 border-b border-slate-200/60">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">2. Раздел: ПРЕИМУЩЕСТВА (Advantages / Bento)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.advantagesTitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("advantagesTitle", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <textarea
-                                value={sectionsDict.advantagesSubtitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("advantagesSubtitle", key as Language, e.target.value)}
-                                rows={2}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section: Portfolio Headers */}
-                    <div className="space-y-3 pb-4 border-b border-slate-200/60">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">3. Раздел: НАШИ РАБОТЫ (Portfolio 50/50 Slider)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.portfolioTitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("portfolioTitle", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <textarea
-                                value={sectionsDict.portfolioSubtitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("portfolioSubtitle", key as Language, e.target.value)}
-                                rows={2}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section: Reviews Headers */}
-                    <div className="space-y-3 pb-4 border-b border-slate-200/60">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">4. Раздел: ОТЗЫВЫ КЛИЕНТОВ (Reviews Carousel)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.reviewsTitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("reviewsTitle", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <textarea
-                                value={sectionsDict.reviewsSubtitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("reviewsSubtitle", key as Language, e.target.value)}
-                                rows={2}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section: Contact Form Headers */}
-                    <div className="space-y-3 pb-4 border-b border-slate-200/60">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">5. Раздел: КОНТАКТНАЯ ФОРМА & СВЯЗЬ (Contact Area)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.contactTitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("contactTitle", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <textarea
-                                value={sectionsDict.contactSubtitle[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("contactSubtitle", key as Language, e.target.value)}
-                                rows={2}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Section: Footer Headers */}
-                    <div className="space-y-3">
-                      <h5 className="text-xs font-extrabold text-blue-700 uppercase">6. ФУТЕР И КОНТАКТНЫЕ ДАННЫЕ (Footer & Address)</h5>
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold text-slate-600 block">Описание компании в футере:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.footerDesc[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("footerDesc", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="space-y-2 pt-1">
-                        <label className="text-[11px] font-bold text-slate-600 block">Адрес офиса:</label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {["az", "en", "ru"].map((key) => (
-                            <div key={key} className="space-y-0.5">
-                              <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
-                              <input
-                                type="text"
-                                value={sectionsDict.footerAddr[key as Language]}
-                                onChange={(e) => handleSectionsDictChange("footerAddr", key as Language, e.target.value)}
-                                className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-
-              {/* TAB 6: REQUESTS / MONITORING */}
-              {activeTab === "submissions" && (
-                <div className="space-y-6 text-left font-sans">
-                  <div className="flex justify-between items-center bg-slate-900 text-white p-4 rounded-xl">
-                    <div>
-                      <h4 className="text-xs font-mono text-sky-400 uppercase tracking-widest font-bold">Входящие лиды с форм</h4>
-                      <p className="text-xs text-slate-300">Прямое управление заказами на обратный звонок</p>
-                    </div>
-                    {submissions.length > 0 && (
                       <button
-                        onClick={onClearSubmissions}
-                        className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-colors cursor-pointer"
+                        onClick={() => handleDeleteService(item.id)}
+                        className="text-rose-500 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-50 cursor-pointer"
+                        title="Удалить услугу"
                       >
-                        Очистить историю
+                        <Trash2 className="w-4.5 h-4.5" />
                       </button>
-                    )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Add Service item */}
+              <form onSubmit={handleAddService} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
+                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
+                  Добавление новой услуги:
+                </h4>
+
+                {/* Localised titles */}
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-800">1. Названия услуги на 3-х языках *</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      required
+                      value={newServiceTitleAz}
+                      onChange={(e) => setNewServiceTitleAz(e.target.value)}
+                      placeholder="AZ: Su Çənlərinin təmizlənməsi"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                    <input
+                      type="text"
+                      value={newServiceTitleEn}
+                      onChange={(e) => setNewServiceTitleEn(e.target.value)}
+                      placeholder="EN: Drinking Water Tank Cleanup"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                    <input
+                      type="text"
+                      value={newServiceTitleRu}
+                      onChange={(e) => setNewServiceTitleRu(e.target.value)}
+                      placeholder="RU: Очистка баков для воды"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Localised Descriptions */}
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-800">2. Описание услуги на 3-х языках</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <textarea
+                      value={newServiceDescAz}
+                      onChange={(e) => setNewServiceDescAz(e.target.value)}
+                      placeholder="AZ: Geniş təsvir..."
+                      rows={2}
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                    <textarea
+                      value={newServiceDescEn}
+                      onChange={(e) => setNewServiceDescEn(e.target.value)}
+                      placeholder="EN: Clean reservoirs with care..."
+                      rows={2}
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                    <textarea
+                      value={newServiceDescRu}
+                      onChange={(e) => setNewServiceDescRu(e.target.value)}
+                      placeholder="RU: Качественная мойка поверхностей..."
+                      rows={2}
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Price and Icon mapping */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Price fields */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-800">3. Цены (AZ, EN, RU)</label>
+                    <div className="grid grid-cols-3 gap-2">
+                      <input
+                        type="text"
+                        value={newServicePriceAz}
+                        onChange={(e) => setNewServicePriceAz(e.target.value)}
+                        placeholder="50 AZN-dən"
+                        className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
+                      />
+                      <input
+                        type="text"
+                        value={newServicePriceEn}
+                        onChange={(e) => setNewServicePriceEn(e.target.value)}
+                        placeholder="From 50 AZN"
+                        className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
+                      />
+                      <input
+                        type="text"
+                        value={newServicePriceRu}
+                        onChange={(e) => setNewServicePriceRu(e.target.value)}
+                        placeholder="От 50 AZN"
+                        className="w-full px-2 py-1.5 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
                   </div>
 
-                  {submissions.length === 0 ? (
-                    <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-3xl text-slate-400 space-y-2">
-                      <p className="text-sm font-semibold">Список заявок пока пуст.</p>
-                      <p className="text-xs">Заполните форму обратной связи на сайте, чтобы увидеть работу монитора в реальном времени!</p>
+                  {/* Icon designation selector */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-800">4. Выберите иконку услуги</label>
+                    <select
+                      value={newServiceIcon}
+                      onChange={(e) => setNewServiceIcon(e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white text-slate-800"
+                    >
+                      <option value="Droplets">💧 Капли (Droplets)</option>
+                      <option value="Fuel">⛽ Топливо (Fuel)</option>
+                      <option value="Settings">⚙️ Снаряжение (Settings)</option>
+                      <option value="ShieldCheck">🛡️ Защита (ShieldCheck)</option>
+                      <option value="Activity">📈 График (Activity)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Добавить Услугу</span>
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB 3: ADVANTAGES */}
+          {activeTab === "advantages" && (
+            <div className="space-y-6">
+              {/* Current list */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие преимущества:</h4>
+                <div className="grid grid-cols-1 gap-3">
+                  {advantages.map((adv) => (
+                    <div key={adv.id} className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center text-left">
+                      <div>
+                        <span className="font-mono text-[10px] text-blue-600 bg-sky-100 px-1.5 py-0.5 rounded leading-none font-bold mr-2">
+                          {adv.iconName}
+                        </span>
+                        <span className="font-bold text-xs text-slate-900">{adv.title.ru}</span>
+                        <p className="text-[11px] text-slate-500 mt-1 leading-normal">{adv.description.ru}</p>
+                      </div>
+                      <button
+                        onClick={() => handleDeleteAdvantage(adv.id)}
+                        className="text-rose-500 hover:text-rose-700 p-1 rounded-lg hover:bg-rose-50 cursor-pointer"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {submissions.map((sub) => (
-                        <div
-                          key={sub.id}
-                          className={`p-4 rounded-2xl border transition-all ${
-                            sub.status === "called"
-                              ? "bg-emerald-50/50 border-emerald-100"
-                              : sub.status === "rejected"
-                              ? "bg-rose-50/40 border-rose-100"
-                              : "bg-white border-slate-200 shadow-md"
-                          }`}
+                  ))}
+                </div>
+              </div>
+
+              {/* Add Advantage Item Form */}
+              <form onSubmit={handleAddAdvantage} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
+                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
+                  Добавить Новое Преимущество:
+                </h4>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-700">Заголовки (AZ, EN, RU) *</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      required
+                      value={newAdvTitleAz}
+                      onChange={(e) => setNewAdvTitleAz(e.target.value)}
+                      placeholder="AZ: 100% Zəmanət"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
+                    />
+                    <input
+                      type="text"
+                      value={newAdvTitleEn}
+                      onChange={(e) => setNewAdvTitleEn(e.target.value)}
+                      placeholder="EN: 100% Quality Output"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
+                    />
+                    <input
+                      type="text"
+                      value={newAdvTitleRu}
+                      onChange={(e) => setNewAdvTitleRu(e.target.value)}
+                      placeholder="RU: 100% Гарантия"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-700">Текст преимущества (AZ, EN, RU)</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      value={newAdvDescAz}
+                      onChange={(e) => setNewAdvDescAz(e.target.value)}
+                      placeholder="AZ: Əla komanda ilə..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
+                    />
+                    <input
+                      type="text"
+                      value={newAdvDescEn}
+                      onChange={(e) => setNewAdvDescEn(e.target.value)}
+                      placeholder="EN: With specialized agents..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
+                    />
+                    <input
+                      type="text"
+                      value={newAdvDescRu}
+                      onChange={(e) => setNewAdvDescRu(e.target.value)}
+                      placeholder="RU: С нашей квалифицированной бригадой..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-700">Иконка преимущества</label>
+                  <select
+                    value={newAdvIcon}
+                    onChange={(e) => setNewAdvIcon(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-white text-slate-800"
+                  >
+                    <option value="Activity">🛡️ Сертификат (Activity)</option>
+                    <option value="Cpu">⚡ Немецкие машины (Cpu)</option>
+                    <option value="FileCheck">📝 Договор с НДС (FileCheck)</option>
+                    <option value="Leaf">🌱 Экологично (Leaf)</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Добавить преимущество</span>
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB 4: PORTFOLIO */}
+          {activeTab === "portfolio" && (
+            <div className="space-y-6">
+              {/* Current Portfolio Items */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Существующие работы (Слайдер):</h4>
+                <div className="grid grid-cols-1 gap-4">
+                  {portfolio.map((item) => (
+                    <div key={item.id} className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex flex-col sm:flex-row justify-between gap-4 text-left">
+                      <div className="space-y-2 flex-grow">
+                        <span className="inline-block bg-blue-100 text-blue-800 font-mono text-[9px] px-2 py-0.5 rounded font-bold">
+                          ID: {item.id}
+                        </span>
+                        <h5 className="font-bold text-slate-900 text-sm">{item.title.ru || item.title.az}</h5>
+                        <p className="text-xs text-slate-500 leading-relaxed font-light">{item.description.ru || item.description.az}</p>
+
+                        {/* Images links debug & copy */}
+                        <div className="grid grid-cols-2 gap-3 pt-2">
+                          <div className="bg-white p-2 rounded-xl border border-slate-200">
+                            <span className="text-[9px] uppercase font-bold text-slate-400 block mb-0.5">До (Before Imag URL):</span>
+                            <span className="text-[10px] text-slate-600 font-mono block truncate">{item.beforeImg}</span>
+                          </div>
+                          <div className="bg-white p-2 rounded-xl border border-slate-200">
+                            <span className="text-[9px] uppercase font-bold text-slate-400 block mb-0.5">После (After Imag URL):</span>
+                            <span className="text-[10px] text-slate-600 font-mono block truncate">{item.afterImg}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex sm:flex-col justify-between items-end gap-2 flex-shrink-0">
+                        <button
+                          onClick={() => handleDeletePortfolio(item.id)}
+                          className="text-rose-500 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-50 transition-colors cursor-pointer"
+                          title="Удалить работу из слайдера"
                         >
-                          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2">
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase font-mono ${
-                                  sub.status === "called"
-                                    ? "bg-emerald-100 text-emerald-800"
-                                    : sub.status === "rejected"
-                                    ? "bg-rose-100 text-rose-800"
-                                    : "bg-blue-100 text-blue-800 animate-pulse"
-                                }`}>
-                                  {sub.status === "called" ? "Обзвонен" : sub.status === "rejected" ? "Отказ" : "Новый лид"}
-                                </span>
-                                <span className="text-[10px] text-slate-400 font-mono">{sub.timestamp}</span>
-                              </div>
-                              <h5 className="font-bold text-slate-900 text-sm">{sub.name}</h5>
-                              <p className="text-xs text-blue-700 font-bold">{sub.phone}</p>
-                            </div>
+                          <Trash2 className="w-4.5 h-4.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-                            <div className="flex gap-1.5">
-                              {sub.status !== "called" && (
-                                <button
-                                  onClick={() => onUpdateStatus(sub.id, "called")}
-                                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] cursor-pointer"
-                                >
-                                  Обзвонен
-                                </button>
-                              )}
-                              {sub.status !== "rejected" && (
-                                <button
-                                  onClick={() => onUpdateStatus(sub.id, "rejected")}
-                                  className="px-3 py-1.5 bg-slate-200 hover:bg-rose-600 hover:text-white text-slate-700 font-semibold rounded-lg text-[10px] transition-colors cursor-pointer"
-                                >
-                                  Отказ
-                                </button>
-                              )}
-                            </div>
-                          </div>
+              {/* Add New Finished Work Portfolio item */}
+              <form onSubmit={handleAddPortfolio} className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4 text-left">
+                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <PlusCircle className="w-3.5 h-3.5 text-blue-600" />
+                  Добавить новую фотоработу в Слайдер (До и После):
+                </h4>
 
-                          {/* Extra info */}
-                          <div className="mt-3 pt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                            <div>
-                              <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">Услуга:</span>
-                              <span className="text-slate-800 font-medium">{sub.serviceType}</span>
-                            </div>
-                            {sub.tankVolume && (
-                              <div>
-                                <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">Объем:</span>
-                                <span className="text-slate-800 font-mono font-bold text-xs">{sub.tankVolume}</span>
-                              </div>
-                            )}
+                {/* Titles */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Заголовок AZ *</label>
+                    <input
+                      type="text"
+                      required
+                      value={newPortTitleAz}
+                      onChange={(e) => setNewPortTitleAz(e.target.value)}
+                      placeholder="Sumqayıt təmizlik işi"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700 font-sans">Title EN</label>
+                    <input
+                      type="text"
+                      value={newPortTitleEn}
+                      onChange={(e) => setNewPortTitleEn(e.target.value)}
+                      placeholder="Sumgait Clean job"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Заголовок RU</label>
+                    <input
+                      type="text"
+                      value={newPortTitleRu}
+                      onChange={(e) => setNewPortTitleRu(e.target.value)}
+                      placeholder="Мойка в Сумгаите"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Descriptions */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Описание AZ</label>
+                    <textarea
+                      value={newPortDescAz}
+                      onChange={(e) => setNewPortDescAz(e.target.value)}
+                      rows={2}
+                      placeholder="AZ təsvir..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700 font-sans">Description EN</label>
+                    <textarea
+                      value={newPortDescEn}
+                      onChange={(e) => setNewPortDescEn(e.target.value)}
+                      rows={2}
+                      placeholder="EN description..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Описание RU</label>
+                    <textarea
+                      value={newPortDescRu}
+                      onChange={(e) => setNewPortDescRu(e.target.value)}
+                      rows={2}
+                      placeholder="RU описание..."
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Images URLs inputs */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-800">Ссылка на фотографию «ДО» (Before Image URL) *</label>
+                    <input
+                      type="text"
+                      required
+                      value={newPortBeforeImg}
+                      onChange={(e) => setNewPortBeforeImg(e.target.value)}
+                      placeholder="https://images.unsplash.com/... or relative path"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white font-mono text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-800">Ссылка на фотографию «ПОСЛЕ» (After Image URL) *</label>
+                    <input
+                      type="text"
+                      required
+                      value={newPortAfterImg}
+                      onChange={(e) => setNewPortAfterImg(e.target.value)}
+                      placeholder="https://images.unsplash.com/... or relative path"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-xl bg-white font-mono text-xs text-slate-900 outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Image preset catalog drawer shortcuts for quick validation */}
+                <div className="bg-slate-100 p-3.5 rounded-xl border border-slate-200 space-y-2 text-left">
+                  <span className="text-[10px] uppercase font-bold text-slate-500 block leading-none">
+                    💡 Быстрые пресеты изображений из Unsplash (можно скопировать в буфер кликом):
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                    {[
+                      {
+                        label: "Изначальные грязная/чистая цистерна",
+                        b: "cistern_dirty_before",
+                        a: "cistern_shiny_after",
+                      },
+                      {
+                        label: "Промышленный резервуар из Unsplash (Очистка от нефти)",
+                        b: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800",
+                        a: "https://images.unsplash.com/photo-1581091215367-9b6c00b3035a?auto=format&fit=crop&q=80&w=800",
+                      },
+                      {
+                        label: "Бетонный коллектор сточных вод",
+                        b: "https://images.unsplash.com/photo-1542060748-10c28b629f6f?auto=format&fit=crop&q=80&w=800",
+                        a: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800",
+                      },
+                    ].map((pr, idx) => (
+                      <div key={idx} className="bg-white p-2 rounded border border-slate-200 space-y-1">
+                        <span className="font-semibold block text-slate-700">{pr.label}</span>
+                        <div className="flex gap-1">
+                          <button
+                            type="button"
+                            onClick={() => handleCopyLink(pr.b, `b-${idx}`)}
+                            className="bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded scale-95 flex items-center gap-0.5 truncate max-w-[120px]"
+                          >
+                            {copiedIndex === `b-${idx}` ? "Скопировано!" : "Копи До"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleCopyLink(pr.a, `a-${idx}`)}
+                            className="bg-green-50 text-green-700 px-1.5 py-0.5 rounded scale-95 flex items-center gap-0.5 truncate max-w-[120px]"
+                          >
+                            {copiedIndex === `a-${idx}` ? "Скопировано!" : "Копи После"}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Создать фотослайд</span>
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB 5: HERO GENERAL TEXTS */}
+          {activeTab === "hero" && (
+            <div className="space-y-6 text-left">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4">
+                <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
+                  <Sparkles className="w-4 h-4 text-blue-600" />
+                  Главный экран сайта (Hero Portion):
+                </h4>
+
+                {/* Taglines */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700">Надзаголовок (Tagline):</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">AZ</span>
+                      <input
+                        type="text"
+                        value={heroTexts.tagline.az}
+                        onChange={(e) => handleHeroTextChange("az", "tagline", e.target.value)}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">EN</span>
+                      <input
+                        type="text"
+                        value={heroTexts.tagline.en}
+                        onChange={(e) => handleHeroTextChange("en", "tagline", e.target.value)}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400 font-sans">RU</span>
+                      <input
+                        type="text"
+                        value={heroTexts.tagline.ru}
+                        onChange={(e) => handleHeroTextChange("ru", "tagline", e.target.value)}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main title */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700">Главный заголовок сайта:</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">AZ</span>
+                      <textarea
+                        value={heroTexts.title.az}
+                        onChange={(e) => handleHeroTextChange("az", "title", e.target.value)}
+                        rows={2}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">EN</span>
+                      <textarea
+                        value={heroTexts.title.en}
+                        onChange={(e) => handleHeroTextChange("en", "title", e.target.value)}
+                        rows={2}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1 font-sans">
+                      <span className="text-[10px] font-mono text-slate-400">RU</span>
+                      <textarea
+                        value={heroTexts.title.ru}
+                        onChange={(e) => handleHeroTextChange("ru", "title", e.target.value)}
+                        rows={2}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hero subtitle */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-700">Развернутое описание (Подзаголовок):</label>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">AZ</span>
+                      <textarea
+                        value={heroTexts.subtitle.az}
+                        onChange={(e) => handleHeroTextChange("az", "subtitle", e.target.value)}
+                        rows={3}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">EN</span>
+                      <textarea
+                        value={heroTexts.subtitle.en}
+                        onChange={(e) => handleHeroTextChange("en", "subtitle", e.target.value)}
+                        rows={3}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-slate-400">RU</span>
+                      <textarea
+                        value={heroTexts.subtitle.ru}
+                        onChange={(e) => handleHeroTextChange("ru", "subtitle", e.target.value)}
+                        rows={3}
+                        className="w-full p-2 border border-slate-200 rounded-lg text-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section Stats numbers */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-4">
+                <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
+                  <RotateCcw className="w-4 h-4 text-blue-600" />
+                  Показатели Статистики (Цифры на главном экране):
+                </h4>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Вымытых емкостей</label>
+                    <input
+                      type="text"
+                      value={statsTexts.jobs}
+                      onChange={(e) => handleStatsChange("jobs", e.target.value)}
+                      className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Лет нашего опыта</label>
+                    <input
+                      type="text"
+                      value={statsTexts.experience}
+                      onChange={(e) => handleStatsChange("experience", e.target.value)}
+                      className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
+                    />
+                  </div>
+                  <div className="space-y-1 font-sans">
+                    <label className="text-xs font-semibold text-slate-700">Процент клиентов</label>
+                    <input
+                      type="text"
+                      value={statsTexts.happyClients}
+                      onChange={(e) => handleStatsChange("happyClients", e.target.value)}
+                      className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-700">Время на отклик (мин)</label>
+                    <input
+                      type="text"
+                      value={statsTexts.responseTime}
+                      onChange={(e) => handleStatsChange("responseTime", e.target.value)}
+                      className="w-full p-2.5 border border-slate-200 rounded-lg text-xs font-bold text-blue-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* CUSTOM SECTION TITLES & SUBTITLES */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 space-y-6">
+                <h4 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1 border-b border-slate-200 pb-2">
+                  <Sliders className="w-4 h-4 text-blue-600" />
+                  Тексты и Заголовки Разделов Сайта (Многоязычный CMS):
+                </h4>
+
+                {/* Section: Services Headers */}
+                <div className="space-y-3 pb-4 border-b border-slate-200/60">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">1. Раздел: УСЛУГИ (Services)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Заголовок Раздела:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.servicesTitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("servicesTitle", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок Раздела:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <textarea
+                            value={sectionsDict.servicesSubtitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("servicesSubtitle", key as Language, e.target.value)}
+                            rows={2}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section: Advantages Headers */}
+                <div className="space-y-3 pb-4 border-b border-slate-200/60">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">2. Раздел: ПРЕИМУЩЕСТВА (Advantages / Bento)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.advantagesTitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("advantagesTitle", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <textarea
+                            value={sectionsDict.advantagesSubtitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("advantagesSubtitle", key as Language, e.target.value)}
+                            rows={2}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section: Portfolio Headers */}
+                <div className="space-y-3 pb-4 border-b border-slate-200/60">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">3. Раздел: НАШИ РАБОТЫ (Portfolio 50/50 Slider)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.portfolioTitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("portfolioTitle", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <textarea
+                            value={sectionsDict.portfolioSubtitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("portfolioSubtitle", key as Language, e.target.value)}
+                            rows={2}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section: Reviews Headers */}
+                <div className="space-y-3 pb-4 border-b border-slate-200/60">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">4. Раздел: ОТЗЫВЫ КЛИЕНТОВ (Reviews Carousel)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.reviewsTitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("reviewsTitle", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <textarea
+                            value={sectionsDict.reviewsSubtitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("reviewsSubtitle", key as Language, e.target.value)}
+                            rows={2}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section: Contact Form Headers */}
+                <div className="space-y-3 pb-4 border-b border-slate-200/60">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">5. Раздел: КОНТАКТНАЯ ФОРМА & СВЯЗЬ (Contact Area)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Заголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.contactTitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("contactTitle", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Подзаголовок:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <textarea
+                            value={sectionsDict.contactSubtitle[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("contactSubtitle", key as Language, e.target.value)}
+                            rows={2}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section: Footer Headers */}
+                <div className="space-y-3">
+                  <h5 className="text-xs font-extrabold text-blue-700 uppercase">6. ФУТЕР И КОНТАКТНЫЕ ДАННЫЕ (Footer & Address)</h5>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-bold text-slate-600 block">Описание компании в футере:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.footerDesc[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("footerDesc", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 block">Адрес офиса:</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      {["az", "en", "ru"].map((key) => (
+                        <div key={key} className="space-y-0.5">
+                          <span className="text-[9px] font-mono text-slate-400 font-bold uppercase">{key}</span>
+                          <input
+                            type="text"
+                            value={sectionsDict.footerAddr[key as Language]}
+                            onChange={(e) => handleSectionsDictChange("footerAddr", key as Language, e.target.value)}
+                            className="w-full p-2 border border-slate-200 rounded-lg text-xs bg-white text-slate-800"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+
+          {/* TAB 6: REQUESTS / MONITORING */}
+          {activeTab === "submissions" && (
+            <div className="space-y-6 text-left font-sans">
+              <div className="flex justify-between items-center bg-slate-900 text-white p-4 rounded-xl">
+                <div>
+                  <h4 className="text-xs font-mono text-sky-400 uppercase tracking-widest font-bold">Входящие лиды с форм</h4>
+                  <p className="text-xs text-slate-300">Прямое управление заказами на обратный звонок</p>
+                </div>
+                {submissions.length > 0 && (
+                  <button
+                    onClick={onClearSubmissions}
+                    className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-colors cursor-pointer"
+                  >
+                    Очистить историю
+                  </button>
+                )}
+              </div>
+
+              {submissions.length === 0 ? (
+                <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-3xl text-slate-400 space-y-2">
+                  <p className="text-sm font-semibold">Список заявок пока пуст.</p>
+                  <p className="text-xs">Заполните форму обратной связи на сайте, чтобы увидеть работу монитора в реальном времени!</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {submissions.map((sub) => (
+                    <div
+                      key={sub.id}
+                      className={`p-4 rounded-2xl border transition-all ${sub.status === "called"
+                          ? "bg-emerald-50/50 border-emerald-100"
+                          : sub.status === "rejected"
+                            ? "bg-rose-50/40 border-rose-100"
+                            : "bg-white border-slate-200 shadow-md"
+                        }`}
+                    >
+                      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase font-mono ${sub.status === "called"
+                                ? "bg-emerald-100 text-emerald-800"
+                                : sub.status === "rejected"
+                                  ? "bg-rose-100 text-rose-800"
+                                  : "bg-blue-100 text-blue-800 animate-pulse"
+                              }`}>
+                              {sub.status === "called" ? "Обзвонен" : sub.status === "rejected" ? "Отказ" : "Новый лид"}
+                            </span>
+                            <span className="text-[10px] text-slate-400 font-mono">{sub.timestamp}</span>
                           </div>
-                          {sub.notes && (
-                            <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-2">
-                              <span className="text-slate-400 text-[9px] uppercase font-bold block mb-0.5">Комментарий:</span>
-                              <p className="text-slate-600 text-xs italic">“{sub.notes}”</p>
-                            </div>
+                          <h5 className="font-bold text-slate-900 text-sm">{sub.name}</h5>
+                          <p className="text-xs text-blue-700 font-bold">{sub.phone}</p>
+                        </div>
+
+                        <div className="flex gap-1.5">
+                          {sub.status !== "called" && (
+                            <button
+                              onClick={() => onUpdateStatus(sub.id, "called")}
+                              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] cursor-pointer"
+                            >
+                              Обзвонен
+                            </button>
+                          )}
+                          {sub.status !== "rejected" && (
+                            <button
+                              onClick={() => onUpdateStatus(sub.id, "rejected")}
+                              className="px-3 py-1.5 bg-slate-200 hover:bg-rose-600 hover:text-white text-slate-700 font-semibold rounded-lg text-[10px] transition-colors cursor-pointer"
+                            >
+                              Отказ
+                            </button>
                           )}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Extra info */}
+                      <div className="mt-3 pt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">Услуга:</span>
+                          <span className="text-slate-800 font-medium">{sub.serviceType}</span>
+                        </div>
+                        {sub.tankVolume && (
+                          <div>
+                            <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">Объем:</span>
+                            <span className="text-slate-800 font-mono font-bold text-xs">{sub.tankVolume}</span>
+                          </div>
+                        )}
+                      </div>
+                      {sub.notes && (
+                        <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 mt-2">
+                          <span className="text-slate-400 text-[9px] uppercase font-bold block mb-0.5">Комментарий:</span>
+                          <p className="text-slate-600 text-xs italic">“{sub.notes}”</p>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  ))}
                 </div>
               )}
+            </div>
+          )}
 
         </div>
 

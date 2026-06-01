@@ -64,7 +64,7 @@ async def handle_callback(payload: CallbackRequest):
         smtp_port = 587
     smtp_user = os.getenv("SMTP_USER")
     smtp_pass = os.getenv("SMTP_PASS")
-    smtp_sender = os.getenv("SMTP_SENDER", f'"AquaClean Alerts" <{smtp_user or "no-reply@aquaclean.az"}>')
+    smtp_sender = os.getenv("SMTP_SENDER", f'"ecotech Alerts" <{smtp_user or "no-reply@ecotech.az"}>')
     notification_email = os.getenv("NOTIFICATION_EMAIL", smtp_user)
 
     # HTML Email template mirroring original TypeScript server layout
@@ -105,13 +105,13 @@ async def handle_callback(payload: CallbackRequest):
         
         <div style="background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 15px; border-radius: 4px; margin-top: 20px;">
           <p style="margin: 0; font-size: 12px; color: #475569; line-height: 1.4;">
-            <strong>Məlumat:</strong> Bu bildiriş AQUACLEAN saytı üzərindən göndərilmişdir. Geri zənglərə nəzarət etmək üçün CMS panelinə keçid edin.
+            <strong>Məlumat:</strong> Bu bildiriş ecotech saytı üzərindən göndərilmişdir. Geri zənglərə nəzarət etmək üçün CMS panelinə keçid edin.
           </p>
         </div>
       </div>
       
       <div style="background-color: #f1f5f9; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
-        <p style="margin: 0; font-size: 11px; color: #94a3b8; font-family: monospace;">AQUACLEAN SYSTEM AUTOMATION • 2026</p>
+        <p style="margin: 0; font-size: 11px; color: #94a3b8; font-family: monospace;">ecotech SYSTEM AUTOMATION • 2026</p>
       </div>
     </div>
     """
@@ -125,7 +125,7 @@ async def handle_callback(payload: CallbackRequest):
             
             # Setup MIME message structure
             msg = MIMEMultipart("alternative")
-            msg["Subject"] = f"🔔 AQUACLEAN: Yeni Geri Zəng Sifarişi ({name})"
+            msg["Subject"] = f"🔔 ECOTECH: Yeni Geri Zəng Sifarişi ({name})"
             msg["From"] = smtp_sender
             msg["To"] = notification_email
 
